@@ -39,18 +39,37 @@ def write_results(results, output_file):
         print(f"Error writing to file: {e}")
         return False
 
-def main(input_file="input.txt", output_file="output.txt"):
-    """Main function to process a text file."""
-    text = read_file(input_file)
-    if text:
-        results = process_text(text)
-        if results:
-            success = write_results(results, output_file)
-            if success:
-                print(f"Processing complete. Results written to {output_file}")
-                return True
+def main():
+    """Main function to interact with the user and process a text file."""
+    input_file = input("Enter the name of the input file (e.g., input.txt): ")
+    output_file = input("Enter the name of the output file (e.g., output.txt): ")
     
-    print("Processing failed.")
+    text = read_file(input_file)
+    if text is None:
+        return
+
+    print("\nCurrent content of the input file:\n")
+    print(text)
+
+    choice = input("\nDo you want to edit the contents of the input file? (y/n): ").strip().lower()
+    if choice == 'y':
+        new_text = input("\nEnter new text for the input file:\n")
+        try:
+            with open(input_file, 'w') as f:
+                f.write(new_text)
+            text = new_text
+        except Exception as e:
+            print(f"Error updating file: {e}")
+            return
+
+    results = process_text(text)
+    if results:
+        success = write_results(results, output_file)
+        if success:
+            print(f"\n Processing complete. Results written to '{output_file}'")
+            return True
+
+    print("\n Processing failed.")
     return False
 
 if __name__ == "__main__":
