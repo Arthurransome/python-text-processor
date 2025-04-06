@@ -1,0 +1,3 @@
+Hello, GitHub Actions!
+This is a simple text file that will be processed by our Python application.
+We will use GitHub Actions to automate testing and deployment of this application.

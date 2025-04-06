@@ -1,0 +1,13 @@
+Original Text:
+Hello, GitHub Actions!
+This is a simple text file that will be processed by our Python application.
+We will use GitHub Actions to automate testing and deployment of this application.
+
+
+Word Count: 30
+
+Uppercase Text:
+HELLO, GITHUB ACTIONS!
+THIS IS A SIMPLE TEXT FILE THAT WILL BE PROCESSED BY OUR PYTHON APPLICATION.
+WE WILL USE GITHUB ACTIONS TO AUTOMATE TESTING AND DEPLOYMENT OF THIS APPLICATION.
+
