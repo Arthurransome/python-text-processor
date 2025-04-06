@@ -1,3 +1,5 @@
+import sys
+
 def read_file(file_path):
     """Read text from a file."""
     try:
@@ -40,26 +42,38 @@ def write_results(results, output_file):
         return False
 
 def main():
-    """Main function to interact with the user and process a text file."""
-    input_file = input("Enter the name of the input file (e.g., input.txt): ")
-    output_file = input("Enter the name of the output file (e.g., output.txt): ")
-    
-    text = read_file(input_file)
-    if text is None:
-        return
+    """Main function to interact with the user or process with default arguments."""
 
-    print("\nCurrent content of the input file:\n")
-    print(text)
+    # If no command-line arguments are passed, go interactive
+    if len(sys.argv) == 1:
+        input_file = input("Enter the name of the input file (e.g., input.txt): ")
+        output_file = input("Enter the name of the output file (e.g., output.txt): ")
 
-    choice = input("\nDo you want to edit the contents of the input file? (y/n): ").strip().lower()
-    if choice == 'y':
-        new_text = input("\nEnter new text for the input file:\n")
-        try:
-            with open(input_file, 'w') as f:
-                f.write(new_text)
-            text = new_text
-        except Exception as e:
-            print(f"Error updating file: {e}")
+        text = read_file(input_file)
+        if text is None:
+            return
+
+        print("\nCurrent content of the input file:\n")
+        print(text)
+
+        choice = input("\nDo you want to edit the contents of the input file? (y/n): ").strip().lower()
+        if choice == 'y':
+            new_text = input("\nEnter new text for the input file:\n")
+            try:
+                with open(input_file, 'w') as f:
+                    f.write(new_text)
+                text = new_text
+            except Exception as e:
+                print(f"Error updating file: {e}")
+                return
+
+    else:
+        # Non-interactive mode for GitHub Actions
+        input_file = sys.argv[1] if len(sys.argv) > 1 else "input.txt"
+        output_file = sys.argv[2] if len(sys.argv) > 2 else "output.txt"
+        text = read_file(input_file)
+        if text is None:
+            print("\nProcessing failed: Could not read input file.")
             return
 
     results = process_text(text)
