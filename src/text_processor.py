@@ -44,7 +44,7 @@ def write_results(results, output_file):
 def main():
     """Main function to interact with the user or process with default arguments."""
 
-    # If no command-line arguments are passed, go interactive
+    # If no command-line arguments are passed, go interactive!
     if len(sys.argv) == 1:
         input_file = input("Enter the name of the input file (e.g., input.txt): ")
         output_file = input("Enter the name of the output file (e.g., output.txt): ")
